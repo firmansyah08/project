@@ -94,13 +94,22 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->password = Hash::make($request->password);
+        $insert = ([]);
 
-        $insert = ([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => $request->password
-        ]);
+        if ($request->password) {
+            $request->password = Hash::make($request->password);
+
+            $insert = ([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password
+            ]);
+        } else {
+            $insert = ([
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
+        }
 
         $user = User::findOrFail($id);
         $user->update($insert);
