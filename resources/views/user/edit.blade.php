@@ -15,9 +15,14 @@
                     <input type="text" class="form-control" name="name" value="{{ $user->name }}" required>
                 </div>
 
-                <div class="form-group">
+                <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                     <label for="email">Email</label>
                     <input type="email" class="form-control" name="email" value="{{ $user->email }}" required>
+                    @if ($errors->has('email'))
+                        <span class="help-block">
+                            <strong>{{ $errors->first('email') }}</strong>
+                        </span>
+                    @endif
                 </div>
 
                 <div class="form-group">

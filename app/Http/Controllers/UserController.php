@@ -94,6 +94,10 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'email' => 'unique:users'
+        ]);
+
         $insert = ([]);
 
         if ($request->password) {
